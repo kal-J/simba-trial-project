@@ -1,9 +1,6 @@
 import NextAuth from "next-auth";
 import credentialProvider from "next-auth/providers/credentials";
-import axios from "axios";
 import loginHandler from "./login";
-
-const baseUrl = process.env.BASEURL;
 
 const providers = [
   credentialProvider({
@@ -14,7 +11,7 @@ const providers = [
 
         if (user) {
 
-          return { status: "success", data: user.data };
+          return { status: "success", data: user };
         }
       } catch (e) {
         const errorMessage = e?.response?.data?.message || e?.message || e;

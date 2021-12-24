@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Loading from "../components/Loading";
 import { getSession, useSession } from "next-auth/react";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import moment from "moment";
 import curr_format from "../utils/curr_format";
@@ -11,7 +10,7 @@ import { signOut } from "next-auth/react";
 
 export const getServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req });
-  if (!session) {
+  if (!session?.user?.id) {
     res.statusCode = 403;
 
     return { props: { balances: [], transactions: [] } };
