@@ -17,7 +17,7 @@ const providers = [
           return { status: "success", data: user.data };
         }
       } catch (e) {
-        const errorMessage = e?.response?.data?.message || e;
+        const errorMessage = e?.response?.data?.message || e?.message || e;
         // Redirecting to the login page with error message          in the URL
         throw new Error(errorMessage);
       }
