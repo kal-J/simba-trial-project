@@ -2,7 +2,7 @@ import prisma from "../../../lib/prisma";
 import bcrypt from "bcryptjs";
 
 export default async function loginHandler(req, res) {
-  const { email, password } = req.body.user;
+  const { email, password } = req.body;
 
   const user = await prisma.user.findUnique({
     where: {
