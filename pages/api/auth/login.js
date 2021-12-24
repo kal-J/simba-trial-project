@@ -1,9 +1,8 @@
 import prisma from "../../../lib/prisma";
 import bcrypt from "bcryptjs";
 
-
 export default async function loginHandler(req, res) {
-  const { email, password } = req.body.user;
+  const { email, password } = req.body;
 
   const user = await prisma.user.findUnique({
     where: {
@@ -17,21 +16,24 @@ export default async function loginHandler(req, res) {
     },
   });
 
-  if (user) {
-    // validate password
-    const verified = bcrypt.compareSync(password, user.password);
+  return new Promise((resolve, reject) => {
+    if (user) {
+      // validate password
+      const verified = bcrypt.compareSync(password, user.password);
 
-    if (verified) {
-      let userData = { email: user.email, name: user.name, id: user.id };
-      return res.status(200).json(userData);
+      if (verified) {
+        let userData = { email: user.email, name: user.name, id: user.id };
+        return resolve(userData);
+      }
+
+      return reject({ message: "Wrong Email or Password", error: true });
     }
 
-    return res
-      .status(400)
-      .json({ message: "Wrong Email or Password", error: true });
-  }
+    return reject({
+      message: `User with email(${email}) does not exist`,
+      error: true,
+    });
 
-  return res
-    .status(400)
-    .json({ message: `User with email(${email}) does not exist`, error: true });
+  });
+  
 }

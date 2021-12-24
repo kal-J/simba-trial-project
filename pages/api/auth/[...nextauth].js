@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import credentialProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import loginHandler from "./login";
 
 const baseUrl = process.env.BASEURL;
 
@@ -9,29 +10,14 @@ const providers = [
     name: "credentials",
     authorize: async (credentials,req) => {
       try {
-        const user = await axios.post(
-          `${baseUrl}/api/auth/login`,
-          {
-            user: {
-              password: credentials.password,
-              email: credentials.email,
-            },
-          },
-          {
-            headers: {
-              accept: "*/*",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const user = await loginHandler(req,false);
 
         if (user) {
-          //console.log(user.data.token);
 
           return { status: "success", data: user.data };
         }
       } catch (e) {
-        const errorMessage = e?.response?.data?.message || e;
+        const errorMessage = e?.response?.data?.message || e?.message || e;
         // Redirecting to the login page with error message          in the URL
         throw new Error(errorMessage);
       }
