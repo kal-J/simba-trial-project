@@ -113,7 +113,7 @@ export default function Home({ transactions, balances, receivers }) {
       Router.push("/login");
     },
   });
-  
+
   if (status === "loading") return <Loading message={"Loading..."} />;
 
   if (status !== "authenticated") return Router.push("/login");
@@ -126,27 +126,35 @@ export default function Home({ transactions, balances, receivers }) {
     <>
       {loading && <Loading message={"Loading..."} />}
 
-      <div className="flex flex-col items-center min-h-screen py-2">
+      <div className="flex flex-col items-center min-h-screen py-2 w-screen">
         <Head>
           <title>S-Pay</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <div className="flex w-screen flex-row-reverse px-8">
-        <button onClick={() => {
-          setLoading(true);
-          signOut();
-          }} type="button" className="px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Log Out</button>
-        </div>
+        <div className="flex flex-col mx-auto px-4 w-100">
+          <div className="flex my-4 justify-between">
+            <h1 className="text-lg uppercase">Transactions</h1>
 
-        <div className="flex flex-col container mx-auto px-4">
+            <button
+              onClick={() => {
+                setLoading(true);
+                signOut();
+              }}
+              type="button"
+              className="px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out"
+            >
+              Log Out
+            </button>
+          </div>
+
           <div className="flex w-100 justify-between">
             <div className="flex">
               {Object.keys(balances).map((currencyCode, index) => {
                 return (
                   <div
                     key={currencyCode}
-                    className="flex flex-col m-4 py-5 px-10 shadow rounded"
+                    className="flex flex-col mr-4 mb-4 py-5 px-10 shadow rounded"
                   >
                     <span>
                       {currencyCode} <span className="text-xs"> bal</span>
@@ -166,7 +174,7 @@ export default function Home({ transactions, balances, receivers }) {
               <button
                 onClick={() => {
                   setLoading(true);
-                  Router.push("/send-money")
+                  Router.push("/send-money");
                 }}
                 type="button"
                 className="px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -175,10 +183,11 @@ export default function Home({ transactions, balances, receivers }) {
               </button>
             </div>
           </div>
-          <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 mb-4">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
+
+          <div className="-my-2 sm:-mx-6 lg:-mx-8 mb-4">
+            <div className="py-2 align-middle inline-block w-100 sm:px-6 lg:px-8">
+              <div className="shadow border-b border-gray-200 sm:rounded-lg">
+                <table className="table-auto w-100 divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
                       <th

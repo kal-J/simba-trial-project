@@ -262,13 +262,15 @@ const SendMoney = ({ receivers, currencies, balances }) => {
             )}
             <dl>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">To</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <div className="mb-3 xl:w-96">
+                <div className="text-sm font-medium text-gray-500">To</div>
+                <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+
+                  
+                  <div className="mb-3 xl:w-96 w-100">
                     <select
                       required
                       onChange={(e) => setReceiver(e.target.value)}
-                      className="form-select form-select-lg mb-3 block px-4 py-2 text-xl
+                      className="form-select form-select-lg block py-3 px-2 lg:text-xl text-md
                             font-normal
                             text-gray-700
                             bg-white bg-clip-padding bg-no-repeat
@@ -278,7 +280,6 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                             ease-in-out
                             m-0
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      aria-label=".form-select-lg example"
                     >
                       <option value={""}>-- Select receiver --</option>
                       {receivers.map((user, index) => {
@@ -290,13 +291,15 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                       })}
                     </select>
                   </div>
-                </dd>
+                  
+                </div>
               </div>
-              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
+              
+              <div className="bg-white px-4 lg:py-5 pb-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="text-sm font-medium text-gray-500">
                   Amount to send
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                </div>
+                <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <div className="flex">
                     <input
                       required
@@ -329,9 +332,9 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                       type="number"
                       className="
                             form-control
-                            px-4
                             py-2
-                            text-xl
+                            px-2
+                            lg:text-xl text-md
                             font-normal
                             text-gray-700
                             bg-white bg-clip-padding
@@ -370,13 +373,13 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                       })}
                     </select>
                   </div>
-                </dd>
+                </div>
               </div>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
+              <div className="bg-gray-50 px-4 lg:py-5 pt-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="text-sm font-medium text-gray-500">
                   Amount to be received
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                </div>
+                <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <div className="flex">
                     <input
                       required
@@ -391,9 +394,9 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                       type="number"
                       className="
                             form-control
-                            px-4
+                            px-2
                             py-2
-                            text-xl
+                            lg:text-xl text-md
                             font-normal
                             text-gray-700
                             bg-white bg-clip-padding
@@ -442,17 +445,17 @@ const SendMoney = ({ receivers, currencies, balances }) => {
                       })}
                     </select>
                   </div>
-                </dd>
+                </div>
               </div>
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
+                <div className="text-sm font-medium text-gray-500">
                   Exchange rate
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                </div>
+                <div className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   {exRate && (
                     <span>{`1 ${baseCurrency} = ${exRate} ${targetCurrency}`}</span>
                   )}
-                </dd>
+                </div>
               </div>
             </dl>
           </div>
